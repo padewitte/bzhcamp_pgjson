@@ -1,0 +1,11 @@
+links.csv
+	movieId,imdbId,tmdbId
+
+movies.csv
+	movieId,title,genres
+
+tags.csv
+	userId,movieId,tag,timestamp
+
+ratings.csv
+	userId,movieId,rating,timestamp

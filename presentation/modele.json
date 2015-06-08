@@ -1,0 +1,21 @@
+{
+  "id" : 0, //Integer
+  "year" : "...", //String
+  "name" : "...", //String
+  "imdbId" : "...", //Integer
+  "tmdbId" : "...", //Integer
+  "tags" : [ //Array of tags
+    {
+      "userId" : 0, //Integer
+      "tag" : "...", //String
+      "date" : "..." //String
+    }
+  ],
+  "ratings" : [ //Array of ratings
+    {
+      "userId" : 0, //Integer
+      "rating" : "...", //String
+      "date" : "..." //String
+    }
+  ]
+}
