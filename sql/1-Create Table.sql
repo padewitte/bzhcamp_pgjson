@@ -2,6 +2,7 @@
 -- Creation script of the traditionnal schema
 ----------------------------------------------------
 DROP TABLE movies, ratings, tags;
+DROP CONSTRAINT "PK_MOVIES"
 CREATE TABLE movies
 (
   id integer,
@@ -33,5 +34,6 @@ CREATE TABLE tags
 );
 
 commit;
+rollback ;
 
 

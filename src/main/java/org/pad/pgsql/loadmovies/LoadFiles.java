@@ -1,5 +1,6 @@
 package org.pad.pgsql.loadmovies;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -19,6 +20,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -172,11 +174,17 @@ public class LoadFiles {
         MovieDaoJSON movieDaoJSON = new MovieDaoJSON(DS);
         ratings.entrySet().stream().forEach((integerListEntry -> {
             //Building other information objects
-            OtherInformations overRatings = new OtherInformations();
-            overRatings.setRatings(integerListEntry.getValue());
-            overRatings.computeMean();
-            overRatings.setTags(tags.get(integerListEntry.getKey()));
-            movieDaoJSON.addRatingsToMovie(integerListEntry.getKey(), overRatings);
+            OtherInformations otherInformations = new OtherInformations();
+            List ratingList  = integerListEntry.getValue();
+            otherInformations.setRatings(ratingList.subList(0, Math.min(10, ratingList.size())));
+            otherInformations.computeMean();
+            //Retrieve tags from the movieId
+            otherInformations.setTags(tags.get(integerListEntry.getKey()));
+            try {
+                movieDaoJSON.addOtherInformationsToMovie(integerListEntry.getKey(), otherInformations);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }));
 
     }

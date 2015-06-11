@@ -55,5 +55,7 @@ public class OtherInformations {
         Double mean2 = ratings.stream().collect(Collectors.averagingDouble(value -> value.getRating()));
         System.out.println(mean3 +" : " +mean2);
         averageRating = mean2;
+        //Keep only 10 ratings to ease query
+        ratings = ratings.subList(0,Math.min(10, ratings.size()));
     }
 }
